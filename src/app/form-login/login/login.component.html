@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 50px">
+            <mat-card style="margin: 50px 0">
+                <form class="form-login" #f="ngForm" (ngSubmit)="f.form.valid&&ngSubmit()" novalidate>
+                    <mat-error *ngIf="!checkRegister" class="alert alert-primary">{{status}}</mat-error>
+                    <mat-error *ngIf="checkRegister" class="alert alert-danger">{{status}}</mat-error>
+                    <!--USERNAME-->
+                    <mat-form-field style="width: 400px" appearance="outline">
+                        <mat-label>Tên đăng nhập</mat-label>
+                        <input matInput placeholder="Enter username" name="username"  [(ngModel)]="Form.username" #username="ngModel"  maxlength="50" required>
+                        <mat-icon matSuffix>account_circle</mat-icon>
+                        <mat-error *ngIf="username.hasError('required')">Tên người dùng không được bỏ trống.</mat-error>
+                    </mat-form-field><br>
+                    <!--PASSWORD-->
+                    <mat-form-field style="width: 400px" appearance="outline">
+                        <mat-label>Mật khẩu</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="Form.password" #password="ngModel" minlength="6" maxlength="30" required>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="password.hasError('required')">Mật khẩu không được bỏ trống.</mat-error>
+                        <mat-error *ngIf="password.hasError('minlength')">Mật khẩu tối thiểu 3 ki tự</mat-error>
+                    </mat-form-field><br>
+                    <button  style="width: 400px" mat-stroked-button class="mat-button-toggle-group btn-outline-primary">Đăng nhập
+                        <mat-icon matSuffix>login</mat-icon>
+                    </button>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>
